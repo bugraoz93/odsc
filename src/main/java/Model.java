@@ -58,7 +58,7 @@ public class Model
         }
         finalAcc = (allCorrect * 1.0 / instances.size()) * 100.0;
         logger.info("Final ACC for the model " + this.name + ": " + finalAcc);
-        logger.info("All Correct Answers for the model " + this.name + ": "+ allCorrect);
+        logger.info("All Correct Answers for the model " + this.name + ": "+ allCorrect + "\n\n");
 //        File file = plot.plotOutputOption.getFile();
 //        File file1 = plot.outputFileOption.getFile();
 //        logger.info("");

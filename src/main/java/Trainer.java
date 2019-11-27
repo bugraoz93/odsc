@@ -7,6 +7,9 @@ import java.util.Random;
 public class Trainer
 {
     private static final Logger logger = (Logger) LogManager.getLogger(Trainer.class);
+    private int featureNumber;
+    private int classNumber;
+
     public Trainer() {
     }
 
@@ -24,21 +27,33 @@ public class Trainer
         nb.name = "NB";
         nb.train(dataGenerator.getInstances(), dataGenerator.getInstanceExamples());
     }
-    public void trainRandom(int numOfTrail) throws IOException
-    {
-        int featureNumber = 10;
-        int classNumber = 2;
-        logger.info("Model started to train for FeatureNumber: " + featureNumber + " and ClassNumber: " + classNumber);
-        this.train(featureNumber, classNumber, 0, 0, 10000, false);
 
+    private void setAttrsDefault()
+    {
+        this.featureNumber = 10;
+        this.classNumber = 2;
+    }
+
+    public void trainFirst() throws IOException
+    {
+        this.setAttrsDefault();
+        logger.info("Model started to train for FeatureNumber: " + this.featureNumber + " and ClassNumber: " + this.classNumber);
+        this.train(this.featureNumber, this.classNumber, 0, 0, 10000, false);
+    }
+
+    public void trainRandom(int numOfTrail, boolean isFeature, boolean isClass) throws IOException
+    {
         Random random = new Random();
         for (int i = 0; i < numOfTrail; i++)
         {
-            featureNumber = random.nextInt((15 - 5) + 1) + 5;
-            classNumber = random.nextInt((6 - 2) + 1) + 2;
-            logger.info("Model started to train for FeatureNumber: " + featureNumber
-                    + " and ClassNumber: " + classNumber + "\n\n\n");
-            this.train(featureNumber, classNumber, 0, 0, 10000, false);
+            this.setAttrsDefault();
+            if (isFeature)
+                this.featureNumber = random.nextInt((15 - 5) + 1) + 5;
+            if (isClass)
+                this.classNumber = random.nextInt((6 - 2) + 1) + 2;
+            logger.info("Model started to train for FeatureNumber: " + this.featureNumber
+                    + " and ClassNumber: " + this.classNumber);
+            this.train(this.featureNumber, this.classNumber, 0, 0, 10000, false);
         }
     }
 }
