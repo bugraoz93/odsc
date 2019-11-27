@@ -13,7 +13,7 @@ public class Trainer
     public Trainer() {
     }
 
-    public void train(int featureNumber, int classNumber, int instRandSeed, int modelRandSeed, int maxNumberData, boolean saveFile) throws IOException
+    private void train(int featureNumber, int classNumber, int instRandSeed, int modelRandSeed, int maxNumberData, boolean saveFile) throws IOException
     {
         DataGenerator dataGenerator = new DataGenerator();
         dataGenerator.generateData(featureNumber, classNumber, instRandSeed, modelRandSeed,
@@ -34,14 +34,14 @@ public class Trainer
         this.classNumber = 2;
     }
 
-    public void trainFirst() throws IOException
+    public void trainFirst(boolean saveFile) throws IOException
     {
         this.setAttrsDefault();
         logger.info("Model started to train for FeatureNumber: " + this.featureNumber + " and ClassNumber: " + this.classNumber);
-        this.train(this.featureNumber, this.classNumber, 0, 0, 10000, false);
+        this.train(this.featureNumber, this.classNumber, 0, 0, 10000, saveFile);
     }
 
-    public void trainRandom(int numOfTrail, boolean isFeature, boolean isClass) throws IOException
+    public void trainRandom(int numOfTrail, boolean isFeature, boolean isClass, boolean saveFile) throws IOException
     {
         Random random = new Random();
         for (int i = 0; i < numOfTrail; i++)
@@ -53,7 +53,7 @@ public class Trainer
                 this.classNumber = random.nextInt((6 - 2) + 1) + 2;
             logger.info("Model started to train for FeatureNumber: " + this.featureNumber
                     + " and ClassNumber: " + this.classNumber);
-            this.train(this.featureNumber, this.classNumber, 0, 0, 10000, false);
+            this.train(this.featureNumber, this.classNumber, 0, 0, 10000, saveFile);
         }
     }
 }

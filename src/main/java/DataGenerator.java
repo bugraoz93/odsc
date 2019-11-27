@@ -39,7 +39,8 @@ public class DataGenerator
         {
             try
             {
-                this.csvWriter = new FileWriter(fileName + ".csv");
+                this.csvWriter = new FileWriter(featureNumber + "feature-"
+                        + classNumber + "class-" + fileName + ".csv");
             }
             catch (IOException e)
             {
