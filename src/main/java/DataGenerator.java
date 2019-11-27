@@ -17,22 +17,22 @@ public class DataGenerator
     private FileWriter csvWriter;
     private ArrayList<Instance> instances;
     private ArrayList<InstanceExample> instanceExamples;
-    private StandardTaskMonitor standardTaskMonitor;
 
     public DataGenerator() {
         this.randomRBFGenerator = new RandomRBFGenerator();
         this.instances = new ArrayList<Instance>();
         this.instanceExamples = new ArrayList<InstanceExample>();
-        this.standardTaskMonitor = new StandardTaskMonitor();
     }
 
     public void generateData(int featureNumber, int classNumber, int instRandSeed, int modelRandSeed,
                              int maxNumberData, boolean saveFile, String fileName) throws IOException {
         randomRBFGenerator.numAttsOption.setValue(featureNumber);
         randomRBFGenerator.numClassesOption.setValue(classNumber);
+        assert instRandSeed != 0;
         randomRBFGenerator.instanceRandomSeedOption.setValue(instRandSeed);
+        assert modelRandSeed != 0;
         randomRBFGenerator.modelRandomSeedOption.setValue(modelRandSeed);
-        randomRBFGenerator.prepareForUseImpl(standardTaskMonitor, null);
+        randomRBFGenerator.prepareForUse();
 
         int dataCounter = 0;
         if (saveFile)
