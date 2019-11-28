@@ -16,7 +16,9 @@ public class Model
     private Plot plot;
     private BasicMultiLabelPerformanceEvaluator basicMultiLabelPerformanceEvaluator;
     private double finalAcc;
+    private double currentAcc;
     public String name;
+
 
     public Model()
     {
@@ -50,8 +52,9 @@ public class Model
             Measurement[] measurement = basicMultiLabelPerformanceEvaluator.getPerformanceMeasurements();
             logger.debug(measurement[0] + ", " + measurement[1] + ", " + measurement[2] + ", " + measurement[3]
                     + ", " + measurement[4] + ", " + measurement[5]);
-//            plot.xColumnOption.setValue((int) measurement[1].getValue());
-//            plot.yColumnOption.setValue(i);
+            this.currentAcc = (allCorrect * 1.0 / instances.size()) * 100.0;
+            plot.xColumnOption.setValue((int) this.currentAcc);
+            plot.yColumnOption.setValue(i);
 
             back = current;
             current = instances.get(i);
